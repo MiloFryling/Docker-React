@@ -1,0 +1,14 @@
+language: generic
+sudo: required
+
+# run docker
+services:
+  - docker
+
+# build image using Dockerfile.dev
+before_install:
+  - docker build -t milofryling/docker-react -f Dockerfile.dev .
+
+#Tell Travis how to run our test suite
+script:
+  - docker run -e CI=true milofryling/docker-react npm run test
