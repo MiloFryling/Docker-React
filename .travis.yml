@@ -7,22 +7,22 @@ services:
 
 # build image using Dockerfile.dev
 before_install:
-  - docker build -t milofryling/docker-react -f Dockerfile .
+  - docker build -t milofryling/docker-react -f Dockerfile.dev .
 
 #Tell Travis how to run our test suite
 script:
-  - docker run -e CI=true milofryling/docker-react npm run test
+  - docker run -e CI=true milofryling/docker-react npm run test -- --coverage
 
-  deploy:
-    provider: elasticbeanstalk
-    region: "us-east-2"
-    app: "docker-react"
-    env: "DockerReact-env"
-    bucket_name: "elasticbeanstalk-us-east-2-807111812405"
-    bucket_path: "docker-react"
-    on:
-      branch: master
-    access_key_id: 
-        secure: "$AWS_ACCESS_KEY"
-    secret_access_key:
-        secure: "$AWS_SECRET_KEY"
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-807111812405"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: 
+      secure: "$AWS_ACCESS_KEY"
+  secret_access_key:
+      secure: "$AWS_SECRET_KEY"
