@@ -7,7 +7,7 @@ services:
 
 # build image using Dockerfile.dev
 before_install:
-  - docker build -t milofryling/docker-react -f Dockerfile.dev .
+  - docker build -t milofryling/docker-react -f Dockerfile .
 
 #Tell Travis how to run our test suite
 script:
